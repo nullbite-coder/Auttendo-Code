@@ -24,7 +24,7 @@ Open the terminal in the main base folders.
 ```
 It will open the desktop application made using KIVY Framework.
 
-Or you install the EXE file, from our releases.
+Or you can install the EXE file from our releases.
 ## Screenshots
 ### 1. Home Screen
 ![App Screenshot](https://github.com/nullbite-coder/Auttendo-Code/blob/main/screenshots/01.jpg)
