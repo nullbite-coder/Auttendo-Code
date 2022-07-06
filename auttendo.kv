@@ -1,0 +1,407 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+WindowManager:
+    transition: FadeTransition()
+    StartWindow:
+    MainWindow:
+    SysReq:
+    Setup:
+    addUser:
+    Auttendo:
+    Attendance:
+    Setting:
+    Automail:
+
+<StartWindow@Screen>:
+
+    name: "start"
+    RelativeLayout:
+        canvas.before:
+            Rectangle:
+                source: 'resources/bg_start.jpg'
+                size: self.size
+                pos: self.pos
+
+        Image:
+            id: 'logo'
+            source: "resources/logo.png"
+            size_hint_x: 0.4
+            size_hint_y: 0.5
+            pos: self.width/1.33 , self.height
+
+        MDRoundFlatButton:
+            id:"StartButton"
+            text: "Start"
+            font_size: 15
+            size_hint: .2,.1
+            pos_hint: {'center_x':.5, 'center_y':.3}
+            on_release: app.root.current = "main"
+            text_color: 0,0,0,1
+            line_color: 0,0,0,1
+
+<MainWindow>:
+    name: "main"
+    RelativeLayout:
+        canvas.before:
+            Rectangle:
+                source: 'resources/bg_main.jpg'
+                size: self.size
+                pos: self.pos
+        Image:
+            id: 'logo'
+            source: "resources/logo.png"
+            size_hint_x: 0.2
+            size_hint_y: 0.25
+            pos_hint: {'center_x':.5, 'center_y':.85}
+            
+    MDFloatLayout:
+        MDIconButton:
+            icon: ""
+            pos_hint: {"bottom":1}
+            on_release:
+                app.root.current = "start"
+
+    MDFloatLayout:
+
+        #MDFloatingActionButtonSpeedDial:
+            #pos_hint: {"x":.9, "top":.13}
+            #data: root.data
+            #root_button_anim: True
+            #hint_animation: True
+            #right_pad: True
+            #bg_color_stack_button: 0.8,0.75,93,1
+            #bg_color_root_button: 0.8,0.75,93,1
+            #label_text_color: 0.92,0.8,1,1
+
+        MDRoundFlatButton:
+            text: "System Requirements"
+            size_hint: 0.2,0.1
+            text_color: 0,0,0,1
+            line_color: 0,0,0,1
+            pos_hint: {'center_x':.2, 'center_y':.5}
+            on_release: 
+                app.root.current = "sysreq"
+                
+        MDRoundFlatButton:
+            text: "Setup"
+            size_hint: 0.2,0.1
+            text_color: 0,0,0,1
+            line_color: 0,0,0,1
+            pos_hint: {'center_x':.5, 'center_y':.5}
+            on_release: app.root.current = "setup"
+
+        MDRoundFlatButton:
+            text: "Auttendo"
+            size_hint: 0.2,0.1
+            text_color: 0,0,0,1
+            line_color: 0,0,0,1
+            pos_hint: {'center_x':.8, 'center_y':.5}
+            on_release: 
+                app.root.current = "auttendo"
+
+<Setting@Screen>:
+    name: "settings"
+    RelativeLayout:
+        canvas.before:
+            Rectangle:
+                source: 'resources/bg_secondary.jpg'
+                size: self.size
+                pos: self.pos
+        Image:
+            id: 'logo'
+            source: "resources/logo.png"
+            size_hint_x: 0.2
+            size_hint_y: 0.25
+            pos_hint: {'center_x':.5, 'center_y':.85}
+        
+        MDIconButton:
+            icon: "arrow-left-box"
+            pos_hint: {"top":1}
+            on_release:
+                app.root.current = "main"
+
+<SysReq>:
+    name: "sysreq"
+    RelativeLayout:
+        canvas.before:
+            Rectangle:
+                source: 'resources/bg_secondary.jpg'
+                size: self.size
+                pos: self.pos
+        Image:
+            id: 'logo'
+            source: "resources/logo.png"
+            size_hint_x: 0.2
+            size_hint_y: 0.25
+            pos_hint: {'center_x':.5, 'center_y':.85}
+
+    FloatLayout:
+        Label:
+            text: "System Requirements:\n1.Windows 7 or higher required\n2.2 GB of RAM or higher\n3.DirectX 9.0  "
+            font_name: "resources/Roboto-Medium.ttf"
+            font_size: dp(17)
+            color: 0,0,0,1
+        MDIconButton:
+            icon: "arrow-left-box"
+            pos_hint: {"top":1}
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+
+        MDTextField:
+            id: "inputcam"
+            hint_text: "Set Camera"
+            helper_text: "Default: 0"
+            helper_text_mode: "on_focus"
+            pos_hint: {'center_x': 0.5,'top': .4}
+            size_hint_x: None
+            width: root.width/10
+            color_mode: 'custom'
+            line_color_focus: 0,0,0,1
+            line_color_normal: 0,0,0,1
+            
+        MDRoundFlatButton:
+            text: "Check Camera"
+            size_hint: 0.15,0.1
+            text_color: 0,0,0,1
+            line_color: 0,0,0,1
+            pos_hint: {'center_x':.5, 'center_y':.25}
+            on_release: 
+                root.checkCamera()
+
+<Setup>:
+    name: "setup"
+    RelativeLayout:
+        canvas.before:
+            Rectangle:
+                source: 'resources/bg_secondary.jpg'
+                size: self.size
+                pos: self.pos
+        Image:
+            id: 'logo'
+            source: "resources/logo.png"
+            size_hint_x: 0.2
+            size_hint_y: 0.25
+            pos_hint: {'center_x':.5, 'center_y':.85}
+    FloatLayout:
+        MDIconButton:
+            icon: "arrow-left-box"
+            pos_hint: {"top":1}
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+
+    FloatLayout:
+
+        MDRoundFlatButton:
+            text: "Capture Faces"
+            size_hint: 0.2,0.1
+            text_color: 0,0,0,1
+            line_color: 0,0,0,1
+            pos_hint: {'center_x':.5, 'center_y':.57}
+            on_release:
+                app.root.current = "adduser"
+
+
+        MDRoundFlatButton:
+            text: "Train Images"
+            size_hint: 0.2,0.1
+            text_color: 0,0,0,1
+            line_color: 0,0,0,1
+            pos_hint: {'center_x':.5, 'center_y':.43}
+            on_release:
+                root.trainImages() 
+
+<addUser>:
+    id: "adduser"
+    name: "adduser"
+    RelativeLayout:
+        canvas.before:
+            Rectangle:
+                source: 'resources/bg_tertiary.jpg'
+                size: self.size
+                pos: self.pos
+        Image:
+            id: 'logo'
+            source: "resources/logo.png"
+            size_hint_x: 0.2
+            size_hint_y: 0.25
+            pos_hint: {'center_x':.5, 'center_y':.85}
+    
+        MDIconButton:
+            icon: "arrow-left-box"
+            pos_hint: {"top":1}
+            on_release:
+                app.root.current = "setup"
+
+        MDTextField:
+            id: "inputid"
+            hint_text: "Id"
+            pos_hint: {'x': 0.2,'top': .7}
+            size_hint_x: None
+            width: root.width/1.66
+            color_mode: 'custom'
+            line_color_focus: 0,0,0,1
+            line_color_normal: 0,0,0,1
+            font_name: "resources/Roboto-Medium.ttf"
+            
+        MDTextField:
+            id: "inputname"
+            hint_text: "Name"
+            pos_hint: {'x': 0.2,'top': .6}
+            size_hint_x: None
+            width: root.width/1.66
+            line_color_focus: 0,0,0,1
+            line_color_normal: 0,0,0,1
+            font_name: "resources/Roboto-Medium.ttf"
+
+        MDTextField:
+            id: "inputsem"
+            hint_text: "Semester"
+            pos_hint: {'x': 0.2,'top': .5}
+            size_hint_x: None
+            width: root.width/1.66
+            line_color_focus: 0,0,0,1
+            line_color_normal: 0,0,0,1
+            font_name: "resources/Roboto-Medium.ttf"
+        
+        MDTextField:
+            id: "inputmno"
+            hint_text: "Mobile Number"
+            pos_hint: {'x': 0.2,'top': .4}
+            size_hint_x: None
+            width: root.width/1.66
+            line_color_focus: 0,0,0,1
+            line_color_normal: 0,0,0,1
+            font_name: "resources/Roboto-Medium.ttf"
+        
+        MDRoundFlatButton:
+            text: "Submit"
+            size_hint: 0.15,0.1
+            text_color: 0,0,0,1
+            line_color: 0,0,0,1
+            pos_hint: {'center_x':.5, 'center_y':.2}
+            on_release: 
+                app.root.current = "setup"
+                root.submitInfo(self)
+
+<Auttendo>:
+    name: "auttendo"
+    RelativeLayout:
+        canvas.before:
+            Rectangle:
+                source: 'resources/bg_secondary.jpg'
+                size: self.size
+                pos: self.pos
+        Image:
+            id: 'logo'
+            source: "resources/logo.png"
+            size_hint_x: 0.2
+            size_hint_y: 0.25
+            pos_hint: {'center_x':.5, 'center_y':.85}
+
+        MDIconButton:
+            icon: "arrow-left-box"
+            pos_hint: {"top":1}
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+
+        MDRoundFlatButton:
+            text: "Recognize"
+            size_hint: 0.2,0.1
+            text_color: 0,0,0,1
+            line_color: 0,0,0,1
+            pos_hint: {'center_x':.5, 'center_y':.57}
+            on_release:
+                root.recognize()
+
+        MDRoundFlatButton:
+            text: "Attendance"
+            size_hint: 0.2,0.1
+            text_color: 0,0,0,1
+            line_color: 0,0,0,1
+            pos_hint: {'center_x':.5, 'center_y':.43}
+            on_release:
+                app.root.current = "attendance"
+
+<Attendance>:
+    name: "attendance"
+    RelativeLayout:
+        canvas.before:
+            Rectangle:
+                source: 'resources/bg_tertiary.jpg'
+                size: self.size
+                pos: self.pos
+        Image:
+            id: 'logo'
+            source: "resources/logo.png"
+            size_hint_x: 0.2
+            size_hint_y: 0.25
+            pos_hint: {'center_x':.5, 'center_y':.85}
+    
+        MDIconButton:
+            icon: "arrow-left-box"
+            pos_hint: {"top":1}
+            on_release:
+                app.root.current = "auttendo"
+        
+        MDRoundFlatButton:
+            text: "Check Attendance"
+            size_hint: 0.2,0.1
+            text_color: 0,0,0,1
+            line_color: 0,0,0,1
+            pos_hint: {'center_x':.5, 'center_y':.57}
+            on_release:
+                root.checkAttendance()
+
+        MDRoundFlatButton:
+            text: "Mail Attendance"
+            size_hint: 0.2,0.1
+            text_color: 0,0,0,1
+            line_color: 0,0,0,1
+            pos_hint: {'center_x':.5, 'center_y':.43}
+            on_release:
+                app.root.current = "automail"
+
+<Automail>:
+    name: "automail"
+    RelativeLayout:
+        canvas.before:
+            Rectangle:
+                source: 'resources/bg_secondary.jpg'
+                size: self.size
+                pos: self.pos
+        Image:
+            id: 'logo'
+            source: "resources/logo.png"
+            size_hint_x: 0.2
+            size_hint_y: 0.25
+            pos_hint: {'center_x':.5, 'center_y':.85}
+    
+        MDIconButton:
+            icon: "arrow-left-box"
+            pos_hint: {"top":1}
+            on_release:
+                app.root.current = "attendance"
+    FloatLayout:    
+        MDTextField:
+            id: "rmail"
+            hint_text: "Receiver's Mail"
+            pos_hint: {'x': 0.25,'top': .5}
+            size_hint_x: None
+            width: root.width/2
+            helper_text_mode: "on_focus"
+            line_color_focus: 0,0,0,1
+            line_color_normal: 0,0,0,1
+            font_name: "resources/Roboto-Medium.ttf"
+
+        MDRoundFlatButton:
+            text: "Send Mail"
+            size_hint: 0.15,0.1
+            text_color: 0,0,0,1
+            line_color: 0,0,0,1
+            pos_hint: {'center_x':.5, 'center_y':.25}
+            on_release:
+                root.r_mail()
+                app.root.current = "main"
